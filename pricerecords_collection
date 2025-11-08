@@ -1,0 +1,31 @@
+// --- Colección: pricerecords ---
+db.createCollection("pricerecords", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["product", "store", "price"],
+      properties: {
+        product: { bsonType: "string" },
+        normalizedProduct: { bsonType: "string" },
+        store: { bsonType: "string" },
+        price: { bsonType: "number" },
+        unitPrice: { bsonType: ["number", "null"] },
+        currency: { bsonType: "string" },
+        date: { bsonType: "date" },
+        url: { bsonType: ["string", "null"] },
+        raw: { bsonType: "object" },
+        metadata: {
+          bsonType: "object",
+          properties: {
+            queryId: { bsonType: ["string", "null"] },
+            confidence: { bsonType: "number" }
+          }
+        }
+      }
+    }
+  }
+});
+// Índices para 'pricerecords'
+db.pricerecords.createIndex({ "product": 1 });
+db.pricerecords.createIndex({ "normalizedProduct": 1 });
+db.pricerecords.createIndex({ "normalizedProduct": 1, "store": 1, "date": -1 });
