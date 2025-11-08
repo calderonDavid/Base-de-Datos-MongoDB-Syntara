@@ -1,0 +1,22 @@
+db.createCollection("users", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["name", "lastname", "email", "password"],
+      properties: {
+        name: { bsonType: "string" },
+        lastname: { bsonType: "string" },
+        email: { bsonType: "string" },
+        password: { bsonType: "string" },
+        role: { bsonType: "string", enum: ["user", "admin"] },
+        subscription: { bsonType: ["objectId", "null"] },
+        createdAt: { bsonType: "date" }
+      }
+    }
+  }
+});
+// Índice único para email en 'users'
+db.users.createIndex(
+  { "email": 1 },
+  { unique: true }
+);
