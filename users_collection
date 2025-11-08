@@ -1,3 +1,4 @@
+// --- Colección: users ---
 db.createCollection("users", {
   validator: {
     $jsonSchema: {
