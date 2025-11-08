@@ -1,0 +1,17 @@
+// --- Colección: reports ---
+db.createCollection("reports", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      properties: {
+        userId: { bsonType: ["objectId", "null"] },
+        query: { bsonType: "string" },
+        status: { bsonType: "string", enum: ["pending", "ready", "failed"] },
+        generatedAt: { bsonType: ["date", "null"] },
+        downloadUrl: { bsonType: ["string", "null"] },
+        data: { bsonType: ["object", "null"] },
+        createdAt: { bsonType: "date" }
+      }
+    }
+  }
+});
