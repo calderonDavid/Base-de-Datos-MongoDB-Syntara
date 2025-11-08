@@ -1,0 +1,28 @@
+// --- Colección: searches ---
+db.createCollection("searches", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["query"],
+      properties: {
+        userId: { bsonType: ["objectId", "null"] },
+        query: {
+          bsonType: "object",
+          required: ["product"],
+          properties: {
+            product: { bsonType: "string" },
+            quantity: { bsonType: "number" },
+            unit: { bsonType: ["string", "null"] },
+            stores: { bsonType: "array", items: { bsonType: "string" } }
+          }
+        },
+        results: { bsonType: "array", items: { bsonType: "objectId" } },
+        timestamp: { bsonType: "date" }
+      }
+    }
+  }
+});
+// Índice para consultas en 'searches'
+db.searches.createIndex(
+  { "userId": 1, "timestamp": -1 }
+);
