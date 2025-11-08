@@ -1,0 +1,3 @@
+use syntara_db;
+db.dropDatabase();
+print('Base de datos "syntara_db" borrada (si existía).');
