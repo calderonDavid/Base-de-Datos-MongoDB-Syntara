@@ -1,0 +1,19 @@
+// --- Colección: subscriptions ---
+db.createCollection("subscriptions", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["type", "price"],
+      properties: {
+        type: { bsonType: "string", enum: ["Saver", "Pro", "Enterprise"] },
+        price: { bsonType: "number" },
+        currency: { bsonType: "string" },
+        features: { bsonType: "array", items: { bsonType: "string" } },
+        maxSearchesPerMonth: { bsonType: "number" },
+        active: { bsonType: "bool" },
+        startDate: { bsonType: "date" },
+        endDate: { bsonType: ["date", "null"] }
+      }
+    }
+  }
+});
