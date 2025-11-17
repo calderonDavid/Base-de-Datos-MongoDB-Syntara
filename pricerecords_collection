@@ -5,15 +5,46 @@ db.createCollection("pricerecords", {
       bsonType: "object",
       required: ["product", "store", "price"],
       properties: {
-        product: { bsonType: "string" },
-        normalizedProduct: { bsonType: "string" },
-        store: { bsonType: "string" },
-        price: { bsonType: "number" },
-        unitPrice: { bsonType: ["number", "null"] },
-        currency: { bsonType: "string" },
-        date: { bsonType: "date" },
-        url: { bsonType: ["string", "null"] },
-        raw: { bsonType: "object" },
+        product: { 
+          bsonType: "string",
+          description: "Nombre original del producto"
+        },
+        normalizedProduct: { 
+          bsonType: "string",
+          description: "Nombre normalizado para búsquedas (lower case, trim)"
+        },
+        store: { 
+          bsonType: "string",
+          description: "Nombre de la tienda"
+        },
+        price: { 
+          bsonType: "number",
+          description: "Precio actual"
+        },
+        unitPrice: { 
+          bsonType: ["number", "null"],
+          description: "Precio por unidad de medida (opcional)"
+        },
+        currency: { 
+          bsonType: "string",
+          description: "Moneda (default: COP)"
+        },
+        date: { 
+          bsonType: "date",
+          description: "Fecha del registro"
+        },
+        url: { 
+          bsonType: ["string", "null"],
+          description: "Enlace al producto"
+        }, 
+        isOffer: {
+          bsonType: "bool",
+          description: "Indica si el precio es una oferta especial (true/false)"
+        },
+        raw: { 
+          bsonType: "object",
+          description: "Datos crudos originales del scraper"
+        },
         metadata: {
           bsonType: "object",
           properties: {
@@ -25,7 +56,6 @@ db.createCollection("pricerecords", {
     }
   }
 });
-// Índices para 'pricerecords'
 db.pricerecords.createIndex({ "product": 1 });
 db.pricerecords.createIndex({ "normalizedProduct": 1 });
 db.pricerecords.createIndex({ "normalizedProduct": 1, "store": 1, "date": -1 });
