@@ -9,7 +9,7 @@ db.createCollection("users", {
         lastname: { bsonType: "string" },
         email: { bsonType: "string" },
         password: { bsonType: "string" },
-        role: { bsonType: "string", enum: ["user", "admin", "business"] },
+        role: { bsonType: "string", enum: ["user", "admin"] },
         subscription: { bsonType: ["objectId", "null"] },
         createdAt: { bsonType: "date" }
       }
