@@ -41,6 +41,11 @@ db.createCollection("pricerecords", {
           bsonType: "bool",
           description: "Indica si el precio es una oferta especial (true/false)"
         },
+        productDetails: {
+          bsonType: ["string", "null"],
+          description: "Detalles adicionales del producto (default: null)"
+        },
+        // -----------------------------
         raw: { 
           bsonType: "object",
           description: "Datos crudos originales del scraper"
@@ -56,6 +61,8 @@ db.createCollection("pricerecords", {
     }
   }
 });
+
+// Índices para pricerecords
 db.pricerecords.createIndex({ "product": 1 });
 db.pricerecords.createIndex({ "normalizedProduct": 1 });
 db.pricerecords.createIndex({ "normalizedProduct": 1, "store": 1, "date": -1 });
